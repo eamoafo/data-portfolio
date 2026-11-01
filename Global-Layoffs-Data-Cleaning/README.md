@@ -51,9 +51,30 @@ This project addresses these data quality issues to prepare the layoffs dataset 
 - global_layoffs_data_cleaning.sql — SQL script used for cleaning the dataset.
 
 ## Project Outcome
-Completed the SQL data cleaning workflow and prepared the layoffs staging table for exploratory data analysis.
 
-Exact before-and-after record counts and additional data quality metrics have not yet been documented.
+The MySQL data-cleaning workflow produced a deduplicated dataset prepared for exploratory data analysis.
+
+### Data Quality Results
+
+| Metric | Result |
+|---|---:|
+| Original dataset records | 2,361 |
+| Final cleaned records | 1,995 |
+| Unique companies | 1,628 |
+| Exact duplicate groups remaining | 0 |
+| Missing industry values | 1 |
+| Records missing both layoff measures | 0 |
+
+### Validation
+
+The final dataset was validated using SQL queries to check record counts, duplicate groups, missing industry classifications, and incomplete layoff information.
+
+The staging table contained repeated records during development. These were removed using ROW_NUMBER(), and a final GROUP BY validation confirmed that no exact duplicate groups remained.
+
+The original dataset was preserved, and a backup of the staging table was created before the corrective deduplication process.
+
+**Note:** The difference between the original and final record counts includes records removed for data-quality reasons and should not be interpreted solely as duplicate removal.
+
 
 ## Next Steps
 Perform exploratory data analysis to investigate layoffs by industry, company, country, and time period.
