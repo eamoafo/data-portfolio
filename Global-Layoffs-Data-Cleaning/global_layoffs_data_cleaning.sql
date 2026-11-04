@@ -205,3 +205,52 @@ DROP COLUMN row_num;
 -- Final inspection of the cleaned staging table.
 SELECT *
 FROM layoffs_staging2;
+
+-- =========================================================
+-- 6. FINAL DEDUPLICATION AND QUALITY CONTROL
+-- =========================================================
+-- During development, additional records were inserted into
+-- the staging table. This step creates a separate table
+-- containing one row for each unique record.
+--
+-- The original and staging tables remain unchanged.
+
+CREATE TABLE layoffs_deduplicated AS
+SELECT
+    company,
+    location,
+    industry,
+    total_laid_off,
+    percentage_laid_off,
+    `date`,
+    stage,
+    country,
+    funds_raised_millions
+FROM (
+    SELECT
+        *,
+        ROW_NUMBER() OVER (
+            PARTITION BY
+                company,
+                location,
+                industry,
+                total_laid_off,
+                percentage_laid_off,
+                `date`,
+                stage,
+                country,
+                funds_raised_millions
+            ORDER BY company
+        ) AS row_num
+    FROM layoffs_staging2
+) AS numbered
+WHERE row_num = 1;
+
+-- Verify the number of records in the final table.
+SELECT COUNT(*) AS final_records
+FROM layoffs_deduplicated;
+
+-- Expected result from the completed project: 1,995 records.
+-- Additional checks are documented in data_validation.sql.
+
+
