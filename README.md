@@ -14,3 +14,17 @@ Cleaned a global layoffs dataset by removing duplicates, standardizing inconsist
 **SQL skills:** Window functions, CTEs, joins, data manipulation, and data cleaning.
 
 [View Project](./Global-Layoffs-Data-Cleaning/)
+
+
+### 2. Cyclistic Bike-Share Analysis Using MySQL
+
+**Tools:** MySQL Workbench, Power BI or Tableau, Microsoft Word
+
+Analyzing historical bike-share trip data to understand how casual riders and annual members use Cyclistic bikes differently. The goal is to identify behavioral patterns and develop data-driven marketing recommendations that could help increase annual memberships.
+
+**Skills:** SQL, data cleaning, data transformation, exploratory data analysis, customer segmentation, and data visualization.
+
+**Project Status:** In Progress — Ask phase completed.
+
+[View Project](Cyclistic-Bike-Share-Analysis/)
+
